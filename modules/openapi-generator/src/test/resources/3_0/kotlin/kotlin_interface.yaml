@@ -1,0 +1,173 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: Example
+  license:
+    name: MIT
+servers:
+  - url: http://api.example.xyz/v1
+paths:
+  /data/video:
+    get:
+      parameters:
+        - name: videoId
+          in: path
+          required: true
+          description: The id of the video
+          schema:
+            type: string
+      operationId: list
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Video"
+components:
+  schemas:
+    Media:
+      discriminator:
+        propertyName: type
+      required:
+        - type
+      properties:
+        type:
+          type: string
+        media_key:
+          type: string
+        height:
+          type: string
+        width:
+          type: string
+    MediaId:
+      type: string
+      description: The unique identifier of this Media.
+      pattern: ^[0-9]{1,19}$
+      example: '1146654567674912769'
+    Photo:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Media'
+        - type: object
+          properties:
+            url:
+              type: string
+              format: uri
+            alt_text:
+              type: string
+    Video:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Media'
+        - type: object
+          properties:
+            preview_image_url:
+              type: string
+              format: uri
+            duration_ms:
+              type: integer
+            variants:
+              type: array
+              description: An array of all available variants of the media
+              items:
+                type: object
+                properties:
+                  bit_rate:
+                    type: integer
+                    description: The bit rate of the media
+                  content_type:
+                    type: string
+                    description: The content type of the media
+                  url:
+                    type: string
+                    description: The url to the media
+                    format: uri
+            public_metrics:
+              type: object
+              description: Engagement metrics for the Media at the time of the request.
+              properties:
+                view_count:
+                  type: integer
+                  format: int32
+                  description: Number of times this video has been viewed.
+            non_public_metrics:
+              type: object
+              description: Nonpublic engagement metrics for the Media at the time of the request.
+              properties:
+                playback_0_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 0% of the video.
+                playback_25_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 25% of the video.
+                playback_50_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 50% of the video.
+                playback_75_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 75% of the video.
+                playback_100_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 100% of the video.
+            organic_metrics:
+              type: object
+              description: Organic nonpublic engagement metrics for the Media at the time of the request.
+              properties:
+                playback_0_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 0% of the video.
+                playback_25_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 25% of the video.
+                playback_50_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 50% of the video.
+                playback_75_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 75% of the video.
+                playback_100_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 100% of the video.
+                view_count:
+                  type: integer
+                  format: int32
+                  description: Number of times this video has been viewed.
+            promoted_metrics:
+              type: object
+              description: Promoted nonpublic engagement metrics for the Media at the time of the request.
+              properties:
+                playback_0_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 0% of the video.
+                playback_25_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 25% of the video.
+                playback_50_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 50% of the video.
+                playback_75_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 75% of the video.
+                playback_100_count:
+                  type: integer
+                  format: int32
+                  description: Number of users who made it through 100% of the video.
+                view_count:
+                  type: integer
+                  format: int32
+                  description: Number of times this video has been viewed.

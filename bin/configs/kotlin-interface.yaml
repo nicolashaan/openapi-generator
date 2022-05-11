@@ -1,0 +1,8 @@
+generatorName: kotlin
+outputDir: samples/client/petstore/kotlin-interface
+inputSpec: modules/openapi-generator/src/test/resources/3_0/kotlin/kotlin_interface.yaml
+templateDir: modules/openapi-generator/src/main/resources/kotlin-client
+additionalProperties:
+  artifactId: kotlin-intrface
+  serializableModel: "true"
+  dateLibrary: java8
