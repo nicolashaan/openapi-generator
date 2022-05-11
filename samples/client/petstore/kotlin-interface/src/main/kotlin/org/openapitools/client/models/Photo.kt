@@ -57,7 +57,7 @@ data class Photo (
     @Json(name = "alt_text")
     val altText: kotlin.String? = null
 
-) : Media(), Serializable {
+) : Media, Serializable {
     companion object {
         private const val serialVersionUID: Long = 123
     }

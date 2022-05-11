@@ -83,7 +83,7 @@ data class Video (
     @Json(name = "promoted_metrics")
     val promotedMetrics: VideoAllOfPromotedMetrics? = null
 
-) : Media(), Serializable {
+) : Media, Serializable {
     companion object {
         private const val serialVersionUID: Long = 123
     }
